@@ -1,0 +1,56 @@
+[0;32m** constructors **[0m
+The contents of the vector are: 100 100 100 100
+[0;32m** operator= **[0m
+The contents of the copy are: 10 10 10
+[0;32m** assign **[0m
+The contents of the vector are: 12 12 12 
+[0;32m** get_allocator **[0m
+The allocated array contains: 0 1 2 3 4
+[0;32m** at **[0m
+the vector contains: 0 1 2 3 4 5 6 7 8 9
+[0;32m** operator[] **[0m
+the vector contains: 0 1 2 3 4 5 6 7 8 9
+[0;32m** front **[0m
+the front of the vector is 8
+[0;32m** back **[0m
+the back of the vector is 12
+[0;32m** data **[0m
+the vector contains: 10 10 10
+[0;32m** begin and end **[0m
+the first element in the vector is: 1
+the last element in the vector is: 5
+[0;32m** empty **[0m
+before filling the vector, vect is empty: true
+after filling the vector, vect is empty: false
+[0;32m** size && max_size **[0m
+after creating a fresh vector, size: 0
+after pushing 10 elements, size: 10
+after inserting 10 more elements, size: 20
+after assigning 12 elements, size: 12
+after removing an element, size: 11
+the max size of the vector is: 4611686018427387903
+[0;32m** reserve **[0m
+capacity before reserving anything: 10
+capacity after reserving 20 elements: 20
+capacity after reserving 5 elements: 20
+[0;32m** capacity **[0m
+The progress of the capacity: 1 2 4 4 8 8 8 8 16 16 16 16 16 16 16 16 32 32 32 32
+[0;32m** clear **[0m
+the vector contains: 10 20 30
+the vector now contains: 3 17
+[0;32m** insert **[0m
+the vector contains: 30 30 40 40 20 10 10 10 10 10
+[0;32m** erase **[0m
+the vector contains: 4 5 7 8 9 10
+[0;32m** push_back **[0m
+the vector contains: 10 20 30 40 50 60 70 80 90 
+[0;32m** pop_back **[0m
+the vector contains: 0 1 2 3 4 5 6 
+[0;32m** resize **[0m
+the vector contains: 1 2 3 4 5 100 100 100 0 0 0 0
+[0;32m** swap **[0m
+vect1 contains: 20 20 20 20
+vect2 contains: 10 10 10
+[0;32m** swap (non-member) **[0m
+vect1 contains: 20 20 20 20
+vect2 contains: 10 10 10
