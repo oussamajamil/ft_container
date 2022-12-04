@@ -377,12 +377,15 @@ namespace ft
         void resize(size_type n, value_type val = value_type())
         {
 
+			if (n > max_size())
+					throw std::length_error("The capacity required exceeds max_size()");
+            size_t tmpsize = _size;
             if (_size > n)
-                for (size_t i = 0; i <= (_size - n +2) ; ++i)
+                for (size_t i = 0; i < tmpsize - n ; ++i)
                     pop_back();
-            // else if (_size < n)
-            //     for (size_t i = 0; i < n - _size; ++i)
-            //         push_back(val);
+            else
+                for (size_t i = 0; i < n - tmpsize; ++i)
+                    push_back(val);
         }
 
     private:
