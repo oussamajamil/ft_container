@@ -21,7 +21,7 @@ namespace ft{
         reverse_iterator();
         //explicit 
         explicit reverse_iterator (iterator_type it){
-            this->t =current;
+            current = it;
         }
         template <class Iter>  reverse_iterator (const reverse_iterator<Iter>& rev_it){
             *this = rev_it;

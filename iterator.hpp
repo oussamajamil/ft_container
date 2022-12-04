@@ -44,7 +44,7 @@ namespace ft
         {
             return prai != obj.prai;
         }
-        T operator*()
+        reference operator*()
         {
             return *prai;
         }

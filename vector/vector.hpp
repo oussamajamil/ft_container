@@ -246,7 +246,7 @@ namespace ft
             for (size_type i = 0; i < _size; i++)
                 _alloc.destroy(_data + i);
             if (_capacity > 0)
-                _alloc.deallocate(_data, _size);
+                _alloc.deallocate(_data, _capacity);
             _capacity = n;
             _size = n;
             _data = new_dt;
@@ -278,15 +278,15 @@ namespace ft
             difference_type m = end() - position;
             ft::vector<value_type> tmp;
             tmp.assign(position, end());
-            for (size_t i = position - begin(); i < _size; i++)
-                _alloc.destroy(_data + i);
-            if (_size + n > _capacity)
-                reserve(_size + m);
-            _size -= m;
-            for (size_t i = 0; i < n; i++)
-                push_back(val);
-            for (size_t i = 0; i < tmp.size(); i++)
-                push_back(tmp[i]);
+            // for (size_t i = position - begin(); i < _size; i++)
+            //     _alloc.destroy(_data + i);
+            // if (_size + n > _capacity)
+            //     reserve(_size + n);
+            // _size -= m;
+            // for (size_t i = 0; i < n; i++)
+            //     push_back(val);
+            // for (size_t i = 0; i < tmp.size(); i++)
+            //     push_back(tmp[i]);
         }
         template <class InputIterator>
         void insert(iterator position, InputIterator first, InputIterator last,
