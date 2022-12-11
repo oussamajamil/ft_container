@@ -3,11 +3,14 @@
 
 #include <iostream>
 #include <memory>
+#include <algorithm>
+#include <random>
 
 #include "../iterator_traits.hpp"
 #include "../reverse_iterator.hpp"
 #include "../iterator.hpp"
 #include "../enable_if.hpp"
+#include "../lexicographical_compare.hpp"
 #include "../is_integral.hpp"
 
 namespace ft
@@ -71,7 +74,7 @@ namespace ft
             this->_size = 0;
             *this = x;
         }
-        size_type size()
+        size_type size() const
         {
             return this->_size;
         }
@@ -237,7 +240,9 @@ namespace ft
                 throw std::length_error("param > max_size");
             else if (n > _capacity)
                 reserve(n);
-            value_type *new_dt = _alloc.allocate(n);
+            value_type *new_dt;
+            if (n)
+                new_dt = _alloc.allocate(n);
             for (size_type i = 0; i < n; i++)
             {
                 _alloc.construct(new_dt + i, *first);
@@ -278,15 +283,15 @@ namespace ft
             difference_type m = end() - position;
             ft::vector<value_type> tmp;
             tmp.assign(position, end());
-            // for (size_t i = position - begin(); i < _size; i++)
-            //     _alloc.destroy(_data + i);
-            // if (_size + n > _capacity)
-            //     reserve(_size + n);
-            // _size -= m;
-            // for (size_t i = 0; i < n; i++)
-            //     push_back(val);
-            // for (size_t i = 0; i < tmp.size(); i++)
-            //     push_back(tmp[i]);
+            for (size_t i = position - begin(); i < _size; i++)
+                _alloc.destroy(_data + i);
+            if (_size + n > _capacity)
+                reserve(_size + n);
+            _size -= m;
+            for (size_t i = 0; i < n; i++)
+                push_back(val);
+            for (size_t i = 0; i < tmp.size(); i++)
+                push_back(tmp[i]);
         }
         template <class InputIterator>
         void insert(iterator position, InputIterator first, InputIterator last,
@@ -377,14 +382,15 @@ namespace ft
         void resize(size_type n, value_type val = value_type())
         {
 
-			if (n > max_size())
-					throw std::length_error("The capacity required exceeds max_size()");
+            if (n > max_size())
+                throw std::length_error("The capacity required exceeds max_size()");
             size_t tmpsize = _size;
             if (_size > n)
-                for (size_t i = 0; i < tmpsize - n ; ++i)
+                for (size_t i = 0; i < tmpsize - n; ++i)
                     pop_back();
             else
                 for (size_t i = 0; i < n - tmpsize; ++i)
+
                     push_back(val);
         }
 
@@ -394,5 +400,49 @@ namespace ft
         size_t _capacity;
         Alloc _alloc;
     };
+
+    template <class T1, class T2>
+    bool operator==(const ft::vector<T1, T2> &v1, const ft::vector<T1, T2> &v2)
+    {
+        if (v1.size() != v2.size())
+            return false;
+        for (size_t i = 0; i < v1.size(); i++)
+        {
+            if (v1[i] != v2[i])
+                return false;
+        }
+        return true;
+    }
+    template <class T1, class T2>
+    bool operator!=(const vector<T1, T2> &v1, const vector<T1, T2> &v2)
+    {
+        return !(v1 == v2);
+    }
+
+    template <class T1, class T2>
+    bool operator<(const ft::vector<T1, T2> &v1, const ft::vector<T1, T2> &v2)
+    {
+        return lexicographical_compare(v1.begin(), v1.end(), v2.begin(), v2.end());
+    }
+    template <class T1, class T2>
+    bool operator>(const ft::vector<T1, T2> &v1, const ft::vector<T1, T2> &v2)
+    {
+        return lexicographical_compare(v2.begin(), v2.end(), v1.begin(), v1.end());
+    }
+    template <class T1, class T2>
+    bool operator>=(const ft::vector<T1, T2> &v1, const ft::vector<T1, T2> &v2)
+    {
+        return (!lexicographical_compare(v1.begin(), v1.end(), v2.begin(), v2.end()));
+    }
+    template <class T1, class T2>
+    bool operator<=(const ft::vector<T1, T2> &v1, const ft::vector<T1, T2> &v2)
+    {
+        return (!lexicographical_compare(v2.begin(), v2.end(), v1.begin(), v1.end()));
+    }
+    template <class T1, class T2>
+    void swap(const ft::vector<T1, T2> &v1, const ft::vector<T1, T2> &v2)
+    {
+        v1.swap(v2);
+    }
 }
 #endif
